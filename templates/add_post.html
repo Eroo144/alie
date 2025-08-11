@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yeni Post Paylaş</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5" style="max-width: 600px;">
+    <h2>Yeni Post Paylaş</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="image_url" class="form-label">Fotoğraf URL'si</label>
+            <input type="text" class="form-control" id="image_url" name="image_url" required>
+        </div>
+        <div class="mb-3">
+            <label for="caption" class="form-label">Açıklama</label>
+            <textarea class="form-control" id="caption" name="caption" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Paylaş</button>
+    </form>
+    <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Geri Dön</a>
+</div>
+</body>
+</html>
