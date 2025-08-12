@@ -119,6 +119,27 @@ def delete_user(user_id):
 
     return redirect(url_for('admin_panel'))
 
+@app.route('/make_admin/<username>')
+def make_admin(username):
+    if 'username' not in session:
+        flash('Önce giriş yapmalısınız.')
+        return redirect(url_for('login'))
+
+    current_user = User.query.filter_by(username=session['username']).first()
+    if not current_user or not current_user.is_admin:
+        flash('Bu işlemi yapmaya yetkiniz yok.')
+        return redirect(url_for('home'))
+
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        flash('Kullanıcı bulunamadı.')
+        return redirect(url_for('admin_panel'))
+
+    user.is_admin = True
+    db.session.commit()
+    flash(f'{username} admin yapıldı.')
+    return redirect(url_for('admin_panel'))
+
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if 'username' not in session:
